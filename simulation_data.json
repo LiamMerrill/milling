@@ -1,0 +1,1337 @@
+{
+    "nodes": [
+        {
+            "data": {
+                "id": "Warehouse",
+                "label": "Warehouse (1000 units)",
+                "type": "warehouse",
+                "inventory": 1000,
+                "revenue": 0
+            },
+            "position": {
+                "x": 500,
+                "y": 300
+            }
+        },
+        {
+            "data": {
+                "id": "Supply_Center_1",
+                "label": "Supply Center 1 (250 units)",
+                "type": "supply_center",
+                "inventory": 250,
+                "revenue": 0
+            },
+            "position": {
+                "x": 200,
+                "y": 300
+            }
+        },
+        {
+            "data": {
+                "id": "Supply_Center_2",
+                "label": "Supply Center 2 (250 units)",
+                "type": "supply_center",
+                "inventory": 250,
+                "revenue": 0
+            },
+            "position": {
+                "x": 800,
+                "y": 300
+            }
+        },
+        {
+            "data": {
+                "id": "Store_1",
+                "label": "Store 1 (100 units)",
+                "type": "store",
+                "inventory": 100,
+                "revenue": 0
+            },
+            "position": {
+                "x": 181,
+                "y": 240
+            }
+        },
+        {
+            "data": {
+                "id": "Store_2",
+                "label": "Store 2 (100 units)",
+                "type": "store",
+                "inventory": 100,
+                "revenue": 0
+            },
+            "position": {
+                "x": 180,
+                "y": 462
+            }
+        },
+        {
+            "data": {
+                "id": "Store_3",
+                "label": "Store 3 (100 units)",
+                "type": "store",
+                "inventory": 100,
+                "revenue": 0
+            },
+            "position": {
+                "x": 270,
+                "y": 373
+            }
+        },
+        {
+            "data": {
+                "id": "Store_4",
+                "label": "Store 4 (100 units)",
+                "type": "store",
+                "inventory": 100,
+                "revenue": 0
+            },
+            "position": {
+                "x": 251,
+                "y": 212
+            }
+        },
+        {
+            "data": {
+                "id": "Store_5",
+                "label": "Store 5 (100 units)",
+                "type": "store",
+                "inventory": 100,
+                "revenue": 0
+            },
+            "position": {
+                "x": 743,
+                "y": 277
+            }
+        },
+        {
+            "data": {
+                "id": "Store_6",
+                "label": "Store 6 (100 units)",
+                "type": "store",
+                "inventory": 100,
+                "revenue": 0
+            },
+            "position": {
+                "x": 716,
+                "y": 164
+            }
+        },
+        {
+            "data": {
+                "id": "Store_7",
+                "label": "Store 7 (100 units)",
+                "type": "store",
+                "inventory": 100,
+                "revenue": 0
+            },
+            "position": {
+                "x": 758,
+                "y": 266
+            }
+        },
+        {
+            "data": {
+                "id": "Store_8",
+                "label": "Store 8 (100 units)",
+                "type": "store",
+                "inventory": 100,
+                "revenue": 0
+            },
+            "position": {
+                "x": 885,
+                "y": 153
+            }
+        }
+    ],
+    "edges": [
+        {
+            "data": {
+                "source": "Warehouse",
+                "target": "Supply_Center_1",
+                "label": "Supply Path",
+                "distance": 300.0
+            }
+        },
+        {
+            "data": {
+                "source": "Warehouse",
+                "target": "Supply_Center_2",
+                "label": "Supply Path",
+                "distance": 300.0
+            }
+        },
+        {
+            "data": {
+                "source": "Supply_Center_1",
+                "target": "Store_1",
+                "label": "Distribution Path",
+                "distance": 92
+            }
+        },
+        {
+            "data": {
+                "source": "Supply_Center_1",
+                "target": "Store_2",
+                "label": "Distribution Path",
+                "distance": 126
+            }
+        },
+        {
+            "data": {
+                "source": "Supply_Center_1",
+                "target": "Store_3",
+                "label": "Distribution Path",
+                "distance": 118
+            }
+        },
+        {
+            "data": {
+                "source": "Supply_Center_1",
+                "target": "Store_4",
+                "label": "Distribution Path",
+                "distance": 119
+            }
+        },
+        {
+            "data": {
+                "source": "Supply_Center_2",
+                "target": "Store_5",
+                "label": "Distribution Path",
+                "distance": 106
+            }
+        },
+        {
+            "data": {
+                "source": "Supply_Center_2",
+                "target": "Store_6",
+                "label": "Distribution Path",
+                "distance": 80
+            }
+        },
+        {
+            "data": {
+                "source": "Supply_Center_2",
+                "target": "Store_7",
+                "label": "Distribution Path",
+                "distance": 125
+            }
+        },
+        {
+            "data": {
+                "source": "Supply_Center_2",
+                "target": "Store_8",
+                "label": "Distribution Path",
+                "distance": 57
+            }
+        }
+    ],
+    "people": [
+        {
+            "id": "Person_1",
+            "dollars": 63,
+            "units": 0,
+            "position": {
+                "x": 239,
+                "y": 61
+            },
+            "nearest_store": null,
+            "step_fraction": 0
+        },
+        {
+            "id": "Person_2",
+            "dollars": 40,
+            "units": 0,
+            "position": {
+                "x": 633,
+                "y": 762
+            },
+            "nearest_store": null,
+            "step_fraction": 0
+        },
+        {
+            "id": "Person_3",
+            "dollars": 42,
+            "units": 0,
+            "position": {
+                "x": 422,
+                "y": 271
+            },
+            "nearest_store": null,
+            "step_fraction": 0
+        },
+        {
+            "id": "Person_4",
+            "dollars": 93,
+            "units": 0,
+            "position": {
+                "x": 540,
+                "y": 514
+            },
+            "nearest_store": null,
+            "step_fraction": 0
+        },
+        {
+            "id": "Person_5",
+            "dollars": 74,
+            "units": 0,
+            "position": {
+                "x": 99,
+                "y": 194
+            },
+            "nearest_store": null,
+            "step_fraction": 0
+        },
+        {
+            "id": "Person_6",
+            "dollars": 90,
+            "units": 0,
+            "position": {
+                "x": 611,
+                "y": 508
+            },
+            "nearest_store": null,
+            "step_fraction": 0
+        },
+        {
+            "id": "Person_7",
+            "dollars": 69,
+            "units": 0,
+            "position": {
+                "x": 534,
+                "y": 823
+            },
+            "nearest_store": null,
+            "step_fraction": 0
+        },
+        {
+            "id": "Person_8",
+            "dollars": 74,
+            "units": 0,
+            "position": {
+                "x": 828,
+                "y": 463
+            },
+            "nearest_store": null,
+            "step_fraction": 0
+        },
+        {
+            "id": "Person_9",
+            "dollars": 68,
+            "units": 0,
+            "position": {
+                "x": 302,
+                "y": 591
+            },
+            "nearest_store": null,
+            "step_fraction": 0
+        },
+        {
+            "id": "Person_10",
+            "dollars": 46,
+            "units": 0,
+            "position": {
+                "x": 177,
+                "y": 481
+            },
+            "nearest_store": null,
+            "step_fraction": 0
+        },
+        {
+            "id": "Person_11",
+            "dollars": 51,
+            "units": 0,
+            "position": {
+                "x": 136,
+                "y": 823
+            },
+            "nearest_store": null,
+            "step_fraction": 0
+        },
+        {
+            "id": "Person_12",
+            "dollars": 34,
+            "units": 0,
+            "position": {
+                "x": 807,
+                "y": 286
+            },
+            "nearest_store": null,
+            "step_fraction": 0
+        },
+        {
+            "id": "Person_13",
+            "dollars": 42,
+            "units": 0,
+            "position": {
+                "x": 566,
+                "y": 224
+            },
+            "nearest_store": null,
+            "step_fraction": 0
+        },
+        {
+            "id": "Person_14",
+            "dollars": 95,
+            "units": 0,
+            "position": {
+                "x": 927,
+                "y": 242
+            },
+            "nearest_store": null,
+            "step_fraction": 0
+        },
+        {
+            "id": "Person_15",
+            "dollars": 75,
+            "units": 0,
+            "position": {
+                "x": 321,
+                "y": 704
+            },
+            "nearest_store": null,
+            "step_fraction": 0
+        },
+        {
+            "id": "Person_16",
+            "dollars": 61,
+            "units": 0,
+            "position": {
+                "x": 362,
+                "y": 765
+            },
+            "nearest_store": null,
+            "step_fraction": 0
+        },
+        {
+            "id": "Person_17",
+            "dollars": 55,
+            "units": 0,
+            "position": {
+                "x": 273,
+                "y": 859
+            },
+            "nearest_store": null,
+            "step_fraction": 0
+        },
+        {
+            "id": "Person_18",
+            "dollars": 88,
+            "units": 0,
+            "position": {
+                "x": 766,
+                "y": 271
+            },
+            "nearest_store": null,
+            "step_fraction": 0
+        },
+        {
+            "id": "Person_19",
+            "dollars": 67,
+            "units": 0,
+            "position": {
+                "x": 452,
+                "y": 657
+            },
+            "nearest_store": null,
+            "step_fraction": 0
+        },
+        {
+            "id": "Person_20",
+            "dollars": 60,
+            "units": 0,
+            "position": {
+                "x": 298,
+                "y": 81
+            },
+            "nearest_store": null,
+            "step_fraction": 0
+        },
+        {
+            "id": "Person_21",
+            "dollars": 39,
+            "units": 0,
+            "position": {
+                "x": 623,
+                "y": 415
+            },
+            "nearest_store": null,
+            "step_fraction": 0
+        },
+        {
+            "id": "Person_22",
+            "dollars": 45,
+            "units": 0,
+            "position": {
+                "x": 424,
+                "y": 399
+            },
+            "nearest_store": null,
+            "step_fraction": 0
+        },
+        {
+            "id": "Person_23",
+            "dollars": 72,
+            "units": 0,
+            "position": {
+                "x": 300,
+                "y": 218
+            },
+            "nearest_store": null,
+            "step_fraction": 0
+        },
+        {
+            "id": "Person_24",
+            "dollars": 44,
+            "units": 0,
+            "position": {
+                "x": 245,
+                "y": 820
+            },
+            "nearest_store": null,
+            "step_fraction": 0
+        },
+        {
+            "id": "Person_25",
+            "dollars": 42,
+            "units": 0,
+            "position": {
+                "x": 828,
+                "y": 494
+            },
+            "nearest_store": null,
+            "step_fraction": 0
+        },
+        {
+            "id": "Person_26",
+            "dollars": 35,
+            "units": 0,
+            "position": {
+                "x": 462,
+                "y": 671
+            },
+            "nearest_store": null,
+            "step_fraction": 0
+        },
+        {
+            "id": "Person_27",
+            "dollars": 74,
+            "units": 0,
+            "position": {
+                "x": 875,
+                "y": 506
+            },
+            "nearest_store": null,
+            "step_fraction": 0
+        },
+        {
+            "id": "Person_28",
+            "dollars": 78,
+            "units": 0,
+            "position": {
+                "x": 872,
+                "y": 98
+            },
+            "nearest_store": null,
+            "step_fraction": 0
+        },
+        {
+            "id": "Person_29",
+            "dollars": 58,
+            "units": 0,
+            "position": {
+                "x": 205,
+                "y": 406
+            },
+            "nearest_store": null,
+            "step_fraction": 0
+        },
+        {
+            "id": "Person_30",
+            "dollars": 66,
+            "units": 0,
+            "position": {
+                "x": 187,
+                "y": 905
+            },
+            "nearest_store": null,
+            "step_fraction": 0
+        },
+        {
+            "id": "Person_31",
+            "dollars": 98,
+            "units": 0,
+            "position": {
+                "x": 525,
+                "y": 577
+            },
+            "nearest_store": null,
+            "step_fraction": 0
+        },
+        {
+            "id": "Person_32",
+            "dollars": 41,
+            "units": 0,
+            "position": {
+                "x": 302,
+                "y": 175
+            },
+            "nearest_store": null,
+            "step_fraction": 0
+        },
+        {
+            "id": "Person_33",
+            "dollars": 44,
+            "units": 0,
+            "position": {
+                "x": 883,
+                "y": 449
+            },
+            "nearest_store": null,
+            "step_fraction": 0
+        },
+        {
+            "id": "Person_34",
+            "dollars": 55,
+            "units": 0,
+            "position": {
+                "x": 540,
+                "y": 291
+            },
+            "nearest_store": null,
+            "step_fraction": 0
+        },
+        {
+            "id": "Person_35",
+            "dollars": 97,
+            "units": 0,
+            "position": {
+                "x": 236,
+                "y": 865
+            },
+            "nearest_store": null,
+            "step_fraction": 0
+        },
+        {
+            "id": "Person_36",
+            "dollars": 51,
+            "units": 0,
+            "position": {
+                "x": 517,
+                "y": 284
+            },
+            "nearest_store": null,
+            "step_fraction": 0
+        },
+        {
+            "id": "Person_37",
+            "dollars": 79,
+            "units": 0,
+            "position": {
+                "x": 664,
+                "y": 440
+            },
+            "nearest_store": null,
+            "step_fraction": 0
+        },
+        {
+            "id": "Person_38",
+            "dollars": 50,
+            "units": 0,
+            "position": {
+                "x": 541,
+                "y": 520
+            },
+            "nearest_store": null,
+            "step_fraction": 0
+        },
+        {
+            "id": "Person_39",
+            "dollars": 38,
+            "units": 0,
+            "position": {
+                "x": 143,
+                "y": 263
+            },
+            "nearest_store": null,
+            "step_fraction": 0
+        },
+        {
+            "id": "Person_40",
+            "dollars": 85,
+            "units": 0,
+            "position": {
+                "x": 849,
+                "y": 319
+            },
+            "nearest_store": null,
+            "step_fraction": 0
+        },
+        {
+            "id": "Person_41",
+            "dollars": 37,
+            "units": 0,
+            "position": {
+                "x": 812,
+                "y": 710
+            },
+            "nearest_store": null,
+            "step_fraction": 0
+        },
+        {
+            "id": "Person_42",
+            "dollars": 61,
+            "units": 0,
+            "position": {
+                "x": 725,
+                "y": 216
+            },
+            "nearest_store": null,
+            "step_fraction": 0
+        },
+        {
+            "id": "Person_43",
+            "dollars": 65,
+            "units": 0,
+            "position": {
+                "x": 419,
+                "y": 225
+            },
+            "nearest_store": null,
+            "step_fraction": 0
+        },
+        {
+            "id": "Person_44",
+            "dollars": 37,
+            "units": 0,
+            "position": {
+                "x": 698,
+                "y": 441
+            },
+            "nearest_store": null,
+            "step_fraction": 0
+        },
+        {
+            "id": "Person_45",
+            "dollars": 94,
+            "units": 0,
+            "position": {
+                "x": 236,
+                "y": 651
+            },
+            "nearest_store": null,
+            "step_fraction": 0
+        },
+        {
+            "id": "Person_46",
+            "dollars": 89,
+            "units": 0,
+            "position": {
+                "x": 651,
+                "y": 904
+            },
+            "nearest_store": null,
+            "step_fraction": 0
+        },
+        {
+            "id": "Person_47",
+            "dollars": 66,
+            "units": 0,
+            "position": {
+                "x": 797,
+                "y": 607
+            },
+            "nearest_store": null,
+            "step_fraction": 0
+        },
+        {
+            "id": "Person_48",
+            "dollars": 84,
+            "units": 0,
+            "position": {
+                "x": 525,
+                "y": 359
+            },
+            "nearest_store": null,
+            "step_fraction": 0
+        },
+        {
+            "id": "Person_49",
+            "dollars": 66,
+            "units": 0,
+            "position": {
+                "x": 910,
+                "y": 390
+            },
+            "nearest_store": null,
+            "step_fraction": 0
+        },
+        {
+            "id": "Person_50",
+            "dollars": 97,
+            "units": 0,
+            "position": {
+                "x": 208,
+                "y": 472
+            },
+            "nearest_store": null,
+            "step_fraction": 0
+        },
+        {
+            "id": "Person_51",
+            "dollars": 96,
+            "units": 0,
+            "position": {
+                "x": 152,
+                "y": 369
+            },
+            "nearest_store": null,
+            "step_fraction": 0
+        },
+        {
+            "id": "Person_52",
+            "dollars": 51,
+            "units": 0,
+            "position": {
+                "x": 642,
+                "y": 279
+            },
+            "nearest_store": null,
+            "step_fraction": 0
+        },
+        {
+            "id": "Person_53",
+            "dollars": 68,
+            "units": 0,
+            "position": {
+                "x": 611,
+                "y": 880
+            },
+            "nearest_store": null,
+            "step_fraction": 0
+        },
+        {
+            "id": "Person_54",
+            "dollars": 100,
+            "units": 0,
+            "position": {
+                "x": 628,
+                "y": 372
+            },
+            "nearest_store": null,
+            "step_fraction": 0
+        },
+        {
+            "id": "Person_55",
+            "dollars": 48,
+            "units": 0,
+            "position": {
+                "x": 687,
+                "y": 713
+            },
+            "nearest_store": null,
+            "step_fraction": 0
+        },
+        {
+            "id": "Person_56",
+            "dollars": 78,
+            "units": 0,
+            "position": {
+                "x": 646,
+                "y": 286
+            },
+            "nearest_store": null,
+            "step_fraction": 0
+        },
+        {
+            "id": "Person_57",
+            "dollars": 63,
+            "units": 0,
+            "position": {
+                "x": 441,
+                "y": 606
+            },
+            "nearest_store": null,
+            "step_fraction": 0
+        },
+        {
+            "id": "Person_58",
+            "dollars": 36,
+            "units": 0,
+            "position": {
+                "x": 456,
+                "y": 323
+            },
+            "nearest_store": null,
+            "step_fraction": 0
+        },
+        {
+            "id": "Person_59",
+            "dollars": 94,
+            "units": 0,
+            "position": {
+                "x": 807,
+                "y": 361
+            },
+            "nearest_store": null,
+            "step_fraction": 0
+        },
+        {
+            "id": "Person_60",
+            "dollars": 78,
+            "units": 0,
+            "position": {
+                "x": 938,
+                "y": 767
+            },
+            "nearest_store": null,
+            "step_fraction": 0
+        },
+        {
+            "id": "Person_61",
+            "dollars": 60,
+            "units": 0,
+            "position": {
+                "x": 599,
+                "y": 795
+            },
+            "nearest_store": null,
+            "step_fraction": 0
+        },
+        {
+            "id": "Person_62",
+            "dollars": 43,
+            "units": 0,
+            "position": {
+                "x": 167,
+                "y": 941
+            },
+            "nearest_store": null,
+            "step_fraction": 0
+        },
+        {
+            "id": "Person_63",
+            "dollars": 69,
+            "units": 0,
+            "position": {
+                "x": 276,
+                "y": 265
+            },
+            "nearest_store": null,
+            "step_fraction": 0
+        },
+        {
+            "id": "Person_64",
+            "dollars": 70,
+            "units": 0,
+            "position": {
+                "x": 742,
+                "y": 55
+            },
+            "nearest_store": null,
+            "step_fraction": 0
+        },
+        {
+            "id": "Person_65",
+            "dollars": 69,
+            "units": 0,
+            "position": {
+                "x": 412,
+                "y": 512
+            },
+            "nearest_store": null,
+            "step_fraction": 0
+        },
+        {
+            "id": "Person_66",
+            "dollars": 62,
+            "units": 0,
+            "position": {
+                "x": 352,
+                "y": 496
+            },
+            "nearest_store": null,
+            "step_fraction": 0
+        },
+        {
+            "id": "Person_67",
+            "dollars": 87,
+            "units": 0,
+            "position": {
+                "x": 674,
+                "y": 567
+            },
+            "nearest_store": null,
+            "step_fraction": 0
+        },
+        {
+            "id": "Person_68",
+            "dollars": 85,
+            "units": 0,
+            "position": {
+                "x": 121,
+                "y": 822
+            },
+            "nearest_store": null,
+            "step_fraction": 0
+        },
+        {
+            "id": "Person_69",
+            "dollars": 80,
+            "units": 0,
+            "position": {
+                "x": 399,
+                "y": 434
+            },
+            "nearest_store": null,
+            "step_fraction": 0
+        },
+        {
+            "id": "Person_70",
+            "dollars": 54,
+            "units": 0,
+            "position": {
+                "x": 640,
+                "y": 502
+            },
+            "nearest_store": null,
+            "step_fraction": 0
+        },
+        {
+            "id": "Person_71",
+            "dollars": 37,
+            "units": 0,
+            "position": {
+                "x": 59,
+                "y": 285
+            },
+            "nearest_store": null,
+            "step_fraction": 0
+        },
+        {
+            "id": "Person_72",
+            "dollars": 57,
+            "units": 0,
+            "position": {
+                "x": 703,
+                "y": 63
+            },
+            "nearest_store": null,
+            "step_fraction": 0
+        },
+        {
+            "id": "Person_73",
+            "dollars": 78,
+            "units": 0,
+            "position": {
+                "x": 255,
+                "y": 763
+            },
+            "nearest_store": null,
+            "step_fraction": 0
+        },
+        {
+            "id": "Person_74",
+            "dollars": 42,
+            "units": 0,
+            "position": {
+                "x": 576,
+                "y": 373
+            },
+            "nearest_store": null,
+            "step_fraction": 0
+        },
+        {
+            "id": "Person_75",
+            "dollars": 98,
+            "units": 0,
+            "position": {
+                "x": 671,
+                "y": 834
+            },
+            "nearest_store": null,
+            "step_fraction": 0
+        },
+        {
+            "id": "Person_76",
+            "dollars": 36,
+            "units": 0,
+            "position": {
+                "x": 201,
+                "y": 160
+            },
+            "nearest_store": null,
+            "step_fraction": 0
+        },
+        {
+            "id": "Person_77",
+            "dollars": 64,
+            "units": 0,
+            "position": {
+                "x": 823,
+                "y": 307
+            },
+            "nearest_store": null,
+            "step_fraction": 0
+        },
+        {
+            "id": "Person_78",
+            "dollars": 69,
+            "units": 0,
+            "position": {
+                "x": 486,
+                "y": 771
+            },
+            "nearest_store": null,
+            "step_fraction": 0
+        },
+        {
+            "id": "Person_79",
+            "dollars": 82,
+            "units": 0,
+            "position": {
+                "x": 333,
+                "y": 871
+            },
+            "nearest_store": null,
+            "step_fraction": 0
+        },
+        {
+            "id": "Person_80",
+            "dollars": 79,
+            "units": 0,
+            "position": {
+                "x": 75,
+                "y": 401
+            },
+            "nearest_store": null,
+            "step_fraction": 0
+        },
+        {
+            "id": "Person_81",
+            "dollars": 62,
+            "units": 0,
+            "position": {
+                "x": 559,
+                "y": 341
+            },
+            "nearest_store": null,
+            "step_fraction": 0
+        },
+        {
+            "id": "Person_82",
+            "dollars": 84,
+            "units": 0,
+            "position": {
+                "x": 363,
+                "y": 436
+            },
+            "nearest_store": null,
+            "step_fraction": 0
+        },
+        {
+            "id": "Person_83",
+            "dollars": 48,
+            "units": 0,
+            "position": {
+                "x": 505,
+                "y": 569
+            },
+            "nearest_store": null,
+            "step_fraction": 0
+        },
+        {
+            "id": "Person_84",
+            "dollars": 31,
+            "units": 0,
+            "position": {
+                "x": 814,
+                "y": 910
+            },
+            "nearest_store": null,
+            "step_fraction": 0
+        },
+        {
+            "id": "Person_85",
+            "dollars": 99,
+            "units": 0,
+            "position": {
+                "x": 898,
+                "y": 694
+            },
+            "nearest_store": null,
+            "step_fraction": 0
+        },
+        {
+            "id": "Person_86",
+            "dollars": 30,
+            "units": 0,
+            "position": {
+                "x": 237,
+                "y": 821
+            },
+            "nearest_store": null,
+            "step_fraction": 0
+        },
+        {
+            "id": "Person_87",
+            "dollars": 63,
+            "units": 0,
+            "position": {
+                "x": 60,
+                "y": 312
+            },
+            "nearest_store": null,
+            "step_fraction": 0
+        },
+        {
+            "id": "Person_88",
+            "dollars": 30,
+            "units": 0,
+            "position": {
+                "x": 77,
+                "y": 606
+            },
+            "nearest_store": null,
+            "step_fraction": 0
+        },
+        {
+            "id": "Person_89",
+            "dollars": 39,
+            "units": 0,
+            "position": {
+                "x": 531,
+                "y": 333
+            },
+            "nearest_store": null,
+            "step_fraction": 0
+        },
+        {
+            "id": "Person_90",
+            "dollars": 90,
+            "units": 0,
+            "position": {
+                "x": 507,
+                "y": 299
+            },
+            "nearest_store": null,
+            "step_fraction": 0
+        },
+        {
+            "id": "Person_91",
+            "dollars": 90,
+            "units": 0,
+            "position": {
+                "x": 925,
+                "y": 629
+            },
+            "nearest_store": null,
+            "step_fraction": 0
+        },
+        {
+            "id": "Person_92",
+            "dollars": 92,
+            "units": 0,
+            "position": {
+                "x": 113,
+                "y": 586
+            },
+            "nearest_store": null,
+            "step_fraction": 0
+        },
+        {
+            "id": "Person_93",
+            "dollars": 41,
+            "units": 0,
+            "position": {
+                "x": 345,
+                "y": 917
+            },
+            "nearest_store": null,
+            "step_fraction": 0
+        },
+        {
+            "id": "Person_94",
+            "dollars": 61,
+            "units": 0,
+            "position": {
+                "x": 69,
+                "y": 731
+            },
+            "nearest_store": null,
+            "step_fraction": 0
+        },
+        {
+            "id": "Person_95",
+            "dollars": 38,
+            "units": 0,
+            "position": {
+                "x": 241,
+                "y": 302
+            },
+            "nearest_store": null,
+            "step_fraction": 0
+        },
+        {
+            "id": "Person_96",
+            "dollars": 68,
+            "units": 0,
+            "position": {
+                "x": 851,
+                "y": 564
+            },
+            "nearest_store": null,
+            "step_fraction": 0
+        },
+        {
+            "id": "Person_97",
+            "dollars": 69,
+            "units": 0,
+            "position": {
+                "x": 871,
+                "y": 449
+            },
+            "nearest_store": null,
+            "step_fraction": 0
+        },
+        {
+            "id": "Person_98",
+            "dollars": 60,
+            "units": 0,
+            "position": {
+                "x": 101,
+                "y": 707
+            },
+            "nearest_store": null,
+            "step_fraction": 0
+        },
+        {
+            "id": "Person_99",
+            "dollars": 44,
+            "units": 0,
+            "position": {
+                "x": 179,
+                "y": 161
+            },
+            "nearest_store": null,
+            "step_fraction": 0
+        },
+        {
+            "id": "Person_100",
+            "dollars": 50,
+            "units": 0,
+            "position": {
+                "x": 192,
+                "y": 758
+            },
+            "nearest_store": null,
+            "step_fraction": 0
+        }
+    ],
+    "transactions": [],
+    "settings": {
+        "round": 1,
+        "time": 0,
+        "max_time": 100
+    }
+}

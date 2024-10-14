@@ -4,16 +4,39 @@ import pandas as pd
 from utils import calculate_distance, simulate_person_movement
 
 
-def people_behavior_algo1(people, stores):
+def people_behavior_algo1(people, stores, iteration_count):
+    """
+    Simulates the behavior of people, including movement to and from stores, and consumption of units over time.
+    
+    :param people: List of people in the simulation.
+    :param stores: List of stores in the simulation.
+    :param iteration_count: The current iteration of the simulation, used for unit consumption.
+    :return: Updated people and stores after simulating behavior.
+    """
+    
     for person in people:
         # Skip the person if they don't have the required keys
         if 'units' not in person['data'] or 'dollars' not in person['data']:
             continue
 
-        speed = 3  # Set the speed of movement (can be adjusted)
+        speed = 2  # Set the speed of movement (can be adjusted)
 
-        # Check if the person is heading to the store
-        if not person['data'].get('at_store', False):
+        # Check if the person is at home and consuming units
+        if person['data'].get('at_home', False):
+            # Consume 1 unit every 10 iterations
+            if iteration_count % 10 == 0 and person['data']['units'] > 0:
+                person['data']['units'] -= 1
+            person['data']['label'] = f"Units: {person['data']['units']}, $: {person['data']['dollars']}"
+
+            # If person has no units left, go to the store
+            if person['data']['units'] <= 0:
+                person['data']['at_home'] = False
+                person['data']['at_store'] = False
+                person['data']['target_store'] = None  # Reset target store to pick a new one
+                person['data']['step_fraction'] = 0  # Reset step_fraction for movement
+
+        # If the person is heading to the store
+        if not person['data'].get('at_store', False) and not person['data'].get('at_home', False):
             # If person hasn't selected a store yet, find the nearest one
             if person['data'].get('target_store') is None:
                 distances = [
@@ -47,8 +70,18 @@ def people_behavior_algo1(people, stores):
                 person['data']['at_store'] = True  # Mark that they reached the store
                 person['data']['step_fraction'] = 0  # Reset for return journey
 
+                # Handle the transaction when the person arrives at the store
+                if target_store['data']['inventory'] > 0 and person['data']['dollars'] >= 2:
+                    units_to_buy = min(5, target_store['data']['inventory'], person['data']['dollars'] // 2)
+                    target_store['data']['inventory'] -= units_to_buy
+                    target_store['data']['revenue'] = target_store['data'].get('revenue', 0) + units_to_buy * 2
+                    person['data']['units'] += units_to_buy
+                    person['data']['dollars'] -= units_to_buy * 2
+                    person['data']['label'] = f"Units: {person['data']['units']}, $: {person['data']['dollars']}"
+
+
         # If the person has reached the store, they should return to their origin
-        else:
+        elif person['data'].get('at_store', False):
             home_position = person['data']['home_position']
             current_position = person['position']
             total_distance = calculate_distance(current_position, home_position)
@@ -64,6 +97,7 @@ def people_behavior_algo1(people, stores):
                 # Check if they have returned home
                 if person['data']['step_fraction'] >= 1:
                     person['data']['at_store'] = False  # Mark that they've returned to their origin
+                    person['data']['at_home'] = True    # Mark them as being at home
                     person['data']['step_fraction'] = 0  # Reset for next trip
 
     return people, stores
@@ -91,26 +125,76 @@ def people_behavior_algo2(people, stores):
             
     return people_df, stores_df
 
-def distribution_algo1(warehouse, supply_centers, stores):
-    # Access the 'inventory' from the 'data' field of the warehouse
-    total_supply = warehouse['data']['inventory']
-    num_centers = len(supply_centers)
+def distribution_algo1(warehouse, supply_centers, stores, edges, iteration_count):
+    """
+    Distributes units and revenue between warehouse, supply centers, and stores based on edges.
     
-    if num_centers > 0:
-        even_distribution = total_supply // num_centers
+    :param warehouse: Warehouse node.
+    :param supply_centers: List of supply centers.
+    :param stores: List of stores.
+    :param edges: List of edges connecting stores and supply centers.
+    :param iteration_count: The current iteration of the simulation, used for store restocking.
+    :return: Updated warehouse, supply centers, and stores.
+    """
+    
+    # Helper function to find the supply center for a store using edges
+    def find_supply_center_for_store(store_id):
+        for edge in edges:
+            if edge['data']['target'] == store_id:
+                return edge['data']['source']  # Return the supply center's ID
+
+    # Step 1: Stores send money to the supply center only if their revenue reaches $100
+    for center in supply_centers:
+        for store in stores:
+            supply_center_id = find_supply_center_for_store(store['data']['id'])
+            if supply_center_id == center['data']['id']:
+                # Only send money if the store's revenue reaches $100
+                if store['data']['revenue'] >= 100:
+                    center['data']['revenue'] += store['data']['revenue']  # Transfer store's revenue to supply center
+                    store['data']['revenue'] = 0  # Reset store revenue after transfer
+
+        # Update the supply center's label to reflect the updated inventory and revenue
+        center['data']['label'] = f"Supply Center {center['data']['id']} ({int(center['data']['inventory'])} units, ${center['data']['revenue']})"
+
+    # Step 2: Supply centers send all their money to the warehouse
+    total_center_revenue = 0
+    for center in supply_centers:
+        total_center_revenue += center['data']['revenue']
+        warehouse['data']['revenue'] += center['data']['revenue']
+        center['data']['revenue'] = 0  # Reset the supply center's revenue after sending it to the warehouse
+
+    # Step 3: Warehouse produces units based on revenue (2 units per $1)
+    units_produced = warehouse['data']['revenue'] * 2
+    warehouse['data']['inventory'] += units_produced
+    warehouse['data']['revenue'] = 0  # Reset warehouse revenue after producing units
+
+    # Step 4: Warehouse distributes units proportionally to the supply centers based on the revenue they sent
+    if total_center_revenue > 0:
         for center in supply_centers:
-            # Distribute inventory to each supply center
-            center['data']['inventory'] += even_distribution
-            warehouse['data']['inventory'] -= even_distribution
-            
-            # Update the supply center's label to reflect new inventory and revenue
-            center['data']['label'] = f"Supply Center {center['data']['id']} ({center['data']['inventory']} units, ${center['data']['revenue']})"
-    
-    # Now, update the store labels similarly
+            revenue_fraction = center['data']['revenue'] / total_center_revenue
+            units_to_send = revenue_fraction * warehouse['data']['inventory']
+            warehouse['data']['inventory'] -= units_to_send
+            center['data']['inventory'] += units_to_send
+
+            # Update the supply center's label to reflect new inventory
+            center['data']['label'] = f"{center['data']['id']} ({int(center['data']['inventory'])} units, ${center['data']['revenue']})"
+
+    # Step 5: Restock stores when they hit 0 units after a 10-iteration delay
     for store in stores:
-        # Update the store's label to show both inventory and revenue
-        store['data']['label'] = f"{store['data']['id']} ({store['data']['inventory']} units, ${store['data']['revenue']})"
-    
+        if store['data']['inventory'] == 0:
+            if 'restock_timer' not in store['data'] or store['data']['restock_timer'] is None:
+                store['data']['restock_timer'] = iteration_count  # Initialize restock timer
+            
+            # Check if 10 iterations have passed since the store ran out of inventory
+            elif iteration_count - store['data']['restock_timer'] >= 10:
+                store['data']['inventory'] = 100  # Restock 100 units
+                store['data']['restock_timer'] = None  # Reset restock timer after restocking
+        else:
+            store['data']['restock_timer'] = None  # Reset restock timer if store still has inventory
+        
+        # Update the store's label to reflect the current inventory and revenue
+        store['data']['label'] = f"{store['data']['id']} ({int(store['data']['inventory'])} units, ${store['data']['revenue']})"
+
     return warehouse, supply_centers, stores
 
 # Algorithm 2: Prioritize supply centers that are selling more

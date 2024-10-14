@@ -97,11 +97,11 @@ def update_revenue_and_inventory(nodes, edges):
             # Inventory and revenue changes are controlled elsewhere (e.g., in the people behavior function)
             pass
         elif node['data']['type'] == 'supply_center':
-            node['data']['inventory'] = max(0, node['data']['inventory'] - 5)
-            node['data']['revenue'] = node['data'].get('revenue', 0) + 2
+            # Supply center inventory and revenue are updated in the distribution algorithm
+            node['data']['revenue'] = node['data'].get('revenue', 0)  # No automatic revenue increase here
         elif node['data']['type'] == 'warehouse':
-            node['data']['inventory'] = max(0, node['data']['inventory'] - 10)
-            node['data']['revenue'] = node['data'].get('revenue', 0) + 5
+            # Warehouse inventory and revenue are updated in the distribution algorithm
+            node['data']['revenue'] = node['data'].get('revenue', 0)  # No automatic revenue increase here
 
     return nodes, edges
 

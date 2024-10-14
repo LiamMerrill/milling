@@ -11,7 +11,7 @@ def create_layout(nodes, edges):
             dcc.Input(id='supply-center-units', type='number', value=250, min=0, style={'font-family': 'Helvetica, sans-serif'}),
 
             html.Label('Store Starting Units:', style={'font-family': 'Helvetica, sans-serif'}),
-            dcc.Input(id='store-units', type='number', value=10, min=0, style={'font-family': 'Helvetica, sans-serif'}),
+            dcc.Input(id='store-units', type='number', value=100, min=0, style={'font-family': 'Helvetica, sans-serif'}),
 
             html.Label('Range for People Units (min and max):', style={'font-family': 'Helvetica, sans-serif'}),
             dcc.RangeSlider(id='people-range', min=5, max=500, step=5, value=[5, 20],
@@ -99,6 +99,7 @@ def create_layout(nodes, edges):
         html.Div([
             html.Button('Start Simulation', id='start-simulation', n_clicks=0, style={'font-family': 'Helvetica, sans-serif'}),
             html.Button('Stop Simulation', id='stop-simulation', n_clicks=0, style={'font-family': 'Helvetica, sans-serif'}),
+            dcc.Store(id='iteration-count-store', data=0),
             dcc.Interval(id='interval-component', interval=1000, n_intervals=0, disabled=True),
         ], style={'text-align': 'center', 'padding': '20px'})
     ], style={'font-family': 'Helvetica, sans-serif'})  # Apply font-family globally

@@ -1,6 +1,7 @@
 import random
 import numpy as np
 import pandas as pd
+import json
 from utils import calculate_distance, simulate_person_movement
 
 
@@ -142,6 +143,10 @@ def distribution_algo1(warehouse, supply_centers, stores, edges, iteration_count
         for edge in edges:
             if edge['data']['target'] == store_id:
                 return edge['data']['source']  # Return the supply center's ID
+    serializable_locals = {key: value for key, value in locals().items() if not callable(value)}
+
+    print("All local variables (in JSON-like format):")
+    print(json.dumps(serializable_locals, indent=2))  # Print filtered local variables
 
     # Step 1: Stores send money to the supply center only if their revenue reaches $100
     for center in supply_centers:
@@ -157,11 +162,11 @@ def distribution_algo1(warehouse, supply_centers, stores, edges, iteration_count
         center['data']['label'] = f"Supply Center {center['data']['id']} ({int(center['data']['inventory'])} units, ${center['data']['revenue']})"
 
     # Step 2: Supply centers send all their money to the warehouse
-    total_center_revenue = 0
-    for center in supply_centers:
-        total_center_revenue += center['data']['revenue']
-        warehouse['data']['revenue'] += center['data']['revenue']
-        center['data']['revenue'] = 0  # Reset the supply center's revenue after sending it to the warehouse
+    #total_center_revenue = 0
+    #for center in supply_centers:
+    #    total_center_revenue += center['data']['revenue']
+    #    warehouse['data']['revenue'] += center['data']['revenue']
+    #    center['data']['revenue'] = 0  # Reset the supply center's revenue after sending it to the warehouse
 
     # Step 3: Warehouse produces units based on revenue (2 units per $1)
     units_produced = warehouse['data']['revenue'] * 2
@@ -169,15 +174,15 @@ def distribution_algo1(warehouse, supply_centers, stores, edges, iteration_count
     warehouse['data']['revenue'] = 0  # Reset warehouse revenue after producing units
 
     # Step 4: Warehouse distributes units proportionally to the supply centers based on the revenue they sent
-    if total_center_revenue > 0:
-        for center in supply_centers:
-            revenue_fraction = center['data']['revenue'] / total_center_revenue
-            units_to_send = revenue_fraction * warehouse['data']['inventory']
-            warehouse['data']['inventory'] -= units_to_send
-            center['data']['inventory'] += units_to_send
+    #if total_center_revenue > 0:
+    #    for center in supply_centers:
+    #        revenue_fraction = center['data']['revenue'] / total_center_revenue
+    #        units_to_send = revenue_fraction * warehouse['data']['inventory']
+    #        warehouse['data']['inventory'] -= units_to_send
+    #        center['data']['inventory'] += units_to_send
 
             # Update the supply center's label to reflect new inventory
-            center['data']['label'] = f"{center['data']['id']} ({int(center['data']['inventory'])} units, ${center['data']['revenue']})"
+    #        center['data']['label'] = f"{center['data']['id']} ({int(center['data']['inventory'])} units, ${center['data']['revenue']})"
 
     # Step 5: Restock stores when they hit 0 units after a 10-iteration delay
     for store in stores:

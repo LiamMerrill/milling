@@ -44,6 +44,8 @@ def simulate_inventory(elements, people, selected_people_algo, selected_distribu
     # Update inventory and revenue using the function in utils.py
     updated_nodes, updated_edges = update_revenue_and_inventory(nodes, edges)
     
+    warehouse['data']['label'] = f"{warehouse['data']['id']}({int(warehouse['data']['inventory'])} units, ${int(warehouse['data']['revenue'])})"
+
     for supply_center in supply_centers:
         supply_center['data']['label'] = f"{supply_center['data']['id']} ({int(supply_center['data']['inventory'])} units, ${int(supply_center['data']['revenue'])})"
 

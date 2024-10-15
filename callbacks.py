@@ -16,6 +16,8 @@ def register_callbacks(app):
             Output('iteration-count-store', 'data')  # Output to enable/disable the interval component
         ],
         [
+            Input('play-simulation', 'n_clicks'),
+            Input('pause-simulation', 'n_clicks'),
             Input('start-simulation', 'n_clicks'),
             Input('stop-simulation', 'n_clicks'),
             Input('interval-component', 'n_intervals')
@@ -31,7 +33,7 @@ def register_callbacks(app):
         ]
     )
 
-    def initialize_and_update_simulation(n_clicks_start, n_clicks_stop, n_intervals, elements, supply_center_units, store_units, people_range, people_behavior, distribution_algorithm, iteration_count):
+    def initialize_and_update_simulation(n_clicks_play, n_clicks_pause, n_clicks_start, n_clicks_stop, n_intervals, elements, supply_center_units, store_units, people_range, people_behavior, distribution_algorithm, iteration_count):
         ctx = dash.callback_context
         people = [ele for ele in elements if 'data' in ele and 'type' in ele['data'] and ele['data']['type'] == 'person']
 
@@ -59,6 +61,14 @@ def register_callbacks(app):
             # Stop the simulation by disabling the interval
             return elements, True, iteration_count
 
+        # If 'play-simulation' triggered the callback
+        if ctx.triggered[0]['prop_id'] == 'play-simulation.n_clicks':
+            return elements, False, iteration_count  # Enable interval, keep current iteration count
+
+        # If 'pause-simulation' triggered the callback
+        if ctx.triggered[0]['prop_id'] == 'pause-simulation.n_clicks':
+            return elements, True, iteration_count  # Disable interval, keep current iteration count
+        
         # If 'cytoscape-network.elements' triggered the callback (for updating distances)
         if ctx.triggered[0]['prop_id'] == 'cytoscape-network.elements':
             # Ensure `elements` is still a valid list

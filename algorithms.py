@@ -20,7 +20,7 @@ def people_behavior_algo1(people, stores, iteration_count):
         if 'units' not in person['data'] or 'dollars' not in person['data']:
             continue
 
-        speed = 2  # Set the speed of movement (can be adjusted)
+        speed = 3  # Set the speed of movement (can be adjusted)
 
         # Check if the person is at home and consuming units
         if person['data'].get('at_home', False):
@@ -149,24 +149,42 @@ def distribution_algo1(warehouse, supply_centers, stores, edges, iteration_count
     print(json.dumps(serializable_locals, indent=2))  # Print filtered local variables
 
     # Step 1: Stores send money to the supply center only if their revenue reaches $100
-    for center in supply_centers:
-        for store in stores:
-            supply_center_id = find_supply_center_for_store(store['data']['id'])
-            if supply_center_id == center['data']['id']:
-                # Only send money if the store's revenue reaches $100
-                if store['data']['revenue'] >= 100:
-                    center['data']['revenue'] += store['data']['revenue']  # Transfer store's revenue to supply center
-                    store['data']['revenue'] = 0  # Reset store revenue after transfer
+    for hq in warehouse:
+        for center in supply_centers:
+            # Transfer money from stores to the supply center
+            for store in stores:
+                supply_center_id = find_supply_center_for_store(store['data']['id'])
+                if supply_center_id == center['data']['id']:
+                    # Only send money if the store's revenue reaches $100
+                    if store['data']['revenue'] >= 100:
+                        center['data']['revenue'] += store['data']['revenue']  # Transfer store's revenue to supply center
+                        store['data']['revenue'] = 0  # Reset store revenue after transfer
 
-        # Update the supply center's label to reflect the updated inventory and revenue
-        center['data']['label'] = f"Supply Center {center['data']['id']} ({int(center['data']['inventory'])} units, ${center['data']['revenue']})"
+                    # Transfer inventory from supply center to store if store's inventory is 0
+                    if store['data']['inventory'] == 0:
+                        transfer_amount = min(50, center['data']['inventory'])  # Transfer 50 or the remaining inventory
+                        center['data']['inventory'] -= transfer_amount
+                        store['data']['inventory'] += transfer_amount
 
-    # Step 2: Supply centers send all their money to the warehouse
-    #total_center_revenue = 0
-    #for center in supply_centers:
-    #    total_center_revenue += center['data']['revenue']
-    #    warehouse['data']['revenue'] += center['data']['revenue']
-    #    center['data']['revenue'] = 0  # Reset the supply center's revenue after sending it to the warehouse
+            # Transfer revenue from supply center to the warehouse when revenue reaches $500
+            if center['data']['revenue'] >= 500:
+                warehouse['data']['revenue'] += center['data']['revenue']  # Transfer revenue to warehouse
+                center['data']['revenue'] = 0  # Reset center revenue after transfer
+
+            # Restock supply center from the warehouse if its inventory is 0
+            if center['data']['inventory'] == 0:
+                transfer_amount = min(500, warehouse['data']['inventory'])  # Transfer 500 or remaining inventory
+                warehouse['data']['inventory'] -= transfer_amount
+                center['data']['inventory'] += transfer_amount
+
+            # Update the supply center's label to reflect the updated inventory and revenue
+            center['data']['label'] = f"Supply Center {center['data']['id']} ({int(center['data']['inventory'])} units, ${center['data']['revenue']})"
+        # Step 2: Supply centers send all their money to the warehouse
+        #total_center_revenue = 0
+        #for center in supply_centers:
+        #    total_center_revenue += center['data']['revenue']
+        #    warehouse['data']['revenue'] += center['data']['revenue']
+        #    center['data']['revenue'] = 0  # Reset the supply center's revenue after sending it to the warehouse
 
     # Step 3: Warehouse produces units based on revenue (2 units per $1)
     units_produced = warehouse['data']['revenue'] * 2

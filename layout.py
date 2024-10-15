@@ -81,6 +81,7 @@ def create_layout(nodes, edges):
                     'shape' : "ellipse",
                     'content': 'data(label)',  # Show the label (dollars and units)
                     'background-color': 'black',
+                    'border-width':.8,
                     'background-opacity': 0.1,
                     'text-wrap': 'wrap',  # Enable multiline labels
                     'text-valign': 'center',
@@ -97,6 +98,8 @@ def create_layout(nodes, edges):
 
         # Buttons for starting/stopping simulation
         html.Div([
+            html.Button('Play', id='play-simulation', n_clicks=0, style={'font-family': 'Helvetica, sans-serif'}),
+            html.Button('Pause', id='pause-simulation', n_clicks=0, style={'font-family': 'Helvetica, sans-serif'}),
             html.Button('Start Simulation', id='start-simulation', n_clicks=0, style={'font-family': 'Helvetica, sans-serif'}),
             html.Button('Stop Simulation', id='stop-simulation', n_clicks=0, style={'font-family': 'Helvetica, sans-serif'}),
             dcc.Store(id='iteration-count-store', data=0),
